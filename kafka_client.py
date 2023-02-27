@@ -2,7 +2,7 @@ import asyncio
 from confluent_kafka import Producer, KafkaException
 from threading import Thread
 
-config = {"bootstrap.servers": "localhost:9093"}
+config = {"bootstrap.servers": "kafka:9092"}
 
 class AIOProducer:
     def __init__(self, loop=None, producer=None):

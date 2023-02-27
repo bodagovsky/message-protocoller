@@ -1,6 +1,11 @@
 version: "2"
 
 services:
+  listener:
+    image: listener:latest
+    depends_on:
+      - kafka
+
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.8
     ports:
