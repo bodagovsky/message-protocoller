@@ -1,2 +1,4 @@
 /__pycache__
 *.session
+api_id
+api_hash
