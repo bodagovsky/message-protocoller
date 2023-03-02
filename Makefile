@@ -9,4 +9,4 @@ greeting:
 	echo "hello world"
 
 check:
-	echo $(secret)
+	if [ -z $(secret)] ; then echo 'secret is empty'; else echo 'successfully extracted non-empty secret'; fi
