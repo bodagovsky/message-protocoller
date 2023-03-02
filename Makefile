@@ -1,12 +1,12 @@
 
+docker: auth build push
+
+auth:
+	docker login -p $(docker_pass) -u $(docker_user)
+
 build:
-	docker build -f Dockerfile -t listener .
+	docker build -f Dockerfile -t bodagovsky/message-protocoller .
 
 push:
-	docker push listener:latest
+	docker push bodagovsky/message-protocoller:latest
 
-greeting:
-	echo "hello world"
-
-check:
-	if [ -z $(secret)] ; then echo 'secret is empty'; else echo 'successfully extracted non-empty secret'; fi

@@ -25,18 +25,23 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Get session file
+        env: 
+          SESSION_FILE: ${{ secrets.TELEGRAM_SESSION }}
+        run: |
+          echo $SESSION_FILE | base64 --decode >> anon.session
 
-      # Runs a set of commands using the runners shell
-      # - name: Run a multi-line script
-      #   run: |
-      #     echo Add other actions to build,
-      #     echo test, and deploy your project.
-      
-      - name: Build docker image
+      - name: Retreive credentials
         env:
-          secret: ${{ secrets.HELLO_WORLD }} 
+          TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
+          TELEGRAM_API_HASH: ${{ secrets.TELEGRAM_API_HASH }}
+        run: |
+          echo $TELEGRAM_API_ID >> api_id
+          echo $TELEGRAM_API_HASH >> api_hash
+      
+      - name: Update docker image
+        env:
+          docker_user: ${{ secrets.DOCKER_USER }}
+          docker_pass: ${{ secrets.DOCKER_PASS }}
         run: 
-           make check
+           make docker
